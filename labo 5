@@ -1,0 +1,20 @@
+while (1)
+{
+/* USER CODE END WHILE */
+/* USER CODE BEGIN 3 */
+//Datos para enviar
+uint8_t Test [] = "uno \r\n " ;
+uint8_t Prueba [] = "cero \r\n ";
+if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4)==0){
+HAL_UART_Transmit ( & huart2 , Test , sizeof
+( Test ), 10 ); // Env´ıo en modo normal
+HAL_Delay (100);
+}
+else{
+HAL_UART_Transmit ( & huart2 , Prueba , sizeof
+( Prueba ), 10 ); // Env´ıo en modo normal
+HAL_Delay (100);
+}
+}
+/* USER CODE END 3 */
+}
