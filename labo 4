@@ -1,0 +1,19 @@
+uint32_t adc_val;
+uint32_t buffer;
+int main(void)
+{
+HAL_Init();
+MX_GPIO_Init();
+MX_DMA_Init();
+MX_USART2_UART_Init();
+MX_ADC1_Init();
+MX_I2C1_Init();
+while (1)
+{
+HAL_ADC_Start(&hadc1);
+HAL_ADC_PollForConversion(&hadc1, 100);
+adc_val = HAL_ADC_GetValue(&hadc1);
+HAL_ADC_Stop(&hadc1);
+HAL_Delay(500);
+}
+}
