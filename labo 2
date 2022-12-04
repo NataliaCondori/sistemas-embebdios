@@ -1,0 +1,54 @@
+int main(void)
+{
+/* MCU Configuration--------------------*/
+/* Reset of all peripherals, Initializes
+the Flash interface and the Systick. */
+HAL_Init();
+/* USER CODE BEGIN Init */
+/* USER CODE END Init */
+/* Configure the system clock */
+SystemClock_Config();
+/* USER CODE BEGIN SysInit */
+/* USER CODE END SysInit */
+/* Initialize all configured peripherals */
+MX_GPIO_Init();
+/* USER CODE BEGIN 2 */
+int t=500;
+int l=1;
+/* USER CODE END 2 */
+/* Infinite loop */
+/* USER CODE BEGIN WHILE */
+while (1)
+{
+/* USER CODE END WHILE */
+for (int j=8;j<=128;j=j*2){
+HAL_GPIO_WritePin(GPIOA, j, 1);
+HAL_Delay(t);
+if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0)==0){
+if(j==32){
+l++;
+t=t/2;
+}
+else{
+t=t*2;
+l--;
+}
+}
+HAL_GPIO_WritePin(GPIOA, j, 0);
+HAL_Delay(t);
+if(l==5){
+HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, 1);
+HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, 1);
+HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 1);
+HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 1);
+HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, 1);
+HAL_Delay(1500);
+HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, 0);
+HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, 0);
+HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
+HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 0);
+HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, 0);
+l=0;
+t=500;
+}
+}
